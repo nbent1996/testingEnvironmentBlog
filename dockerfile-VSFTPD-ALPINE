@@ -1,0 +1,4 @@
+FROM delfer/alpine-ftp-server:latest
+RUN echo 'listen_port=8021' >> /etc/vsftpd/vsftpd.conf
+
+ENTRYPOINT ["/sbin/tini", "--", "/bin/start_vsftpd.sh"]

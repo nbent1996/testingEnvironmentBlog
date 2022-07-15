@@ -1,0 +1,2 @@
+#!/bin/sh
+sh /opt/jboss/wildfly/bin/standalone.sh --server-config="standalone-full-ha.xml" -Djboss.node.name=dockernode3 -b "192.168.10.4" -bmanagement "192.168.10.4" -Djboss.socket.binding.port-offset=207

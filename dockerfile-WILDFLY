@@ -1,0 +1,27 @@
+FROM eclipse-temurin:17-jdk-alpine
+
+USER root
+
+# Add the WildFly distribution to /opt, and make wildfly the owner of the extracted tar content
+# Make sure the distribution is available from a well-known place
+WORKDIR /opt/jboss
+RUN apk update \
+    && apk add wget \
+    && wget https://github.com/wildfly/wildfly/releases/download/26.1.1.Final/wildfly-preview-26.1.1.Final.tar.gz \
+    && tar xf wildfly-preview-26.1.1.Final.tar.gz \
+    && mv /opt/jboss/wildfly-preview-26.1.1.Final /opt/jboss/wildfly \
+    && rm wildfly-preview-26.1.1.Final.tar.gz \
+    && chown -R 1000:0 /opt/jboss/wildfly \
+    && chmod -R g+rw /opt/jboss/wildfly
+
+# Ensure signals are forwarded to the JVM process correctly for graceful shutdown
+ENV LAUNCH_JBOSS_IN_BACKGROUND true
+
+USER 1000:0
+
+WORKDIR /opt/jboss/wildfly
+
+RUN sh /opt/jboss/wildfly/bin/add-user.sh -u 'pcf' -p 'pcf1234' --silent && \
+    sh /opt/jboss/wildfly/bin/add-user.sh -a -u 'APPpcf' -p 'pcf1234' --silent 
+
+CMD ["/bin/sh", "/opt/jboss/wildfly/levantarWildfly.sh"]
