@@ -1,1 +1,1 @@
-![Diagrama de infraestructura](AmbientePrueba.png)
+![Diagrama de infraestructura](AmbientePruebas.png)
