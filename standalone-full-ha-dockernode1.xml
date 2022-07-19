@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
-<!--CUSTOM STANDALONE-FULL-HA DOCKERNODE1 -->
+<!--Probando Montaje
+CUSTOM STANDALONE-FULL-HA DOCKERNODE1 -->
 <server xmlns="urn:jboss:domain:19.0">
     <extensions>
         <extension module="org.jboss.as.clustering.infinispan"/>
