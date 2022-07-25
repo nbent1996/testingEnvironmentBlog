@@ -21,7 +21,7 @@ USER 1000:0
 
 WORKDIR /opt/jboss/wildfly
 
-RUN sh /opt/jboss/wildfly/bin/add-user.sh -u 'pcf' -p 'pcf1234' --silent && \
-    sh /opt/jboss/wildfly/bin/add-user.sh -a -u 'APPpcf' -p 'pcf1234' --silent 
+RUN sh /opt/jboss/wildfly/bin/add-user.sh -u 'user' -p 'user1234' --silent && \
+    sh /opt/jboss/wildfly/bin/add-user.sh -a -u 'APPuser' -p 'user1234' --silent 
 
 CMD ["/bin/sh", "/opt/jboss/wildfly/levantarWildfly.sh"]
