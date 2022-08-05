@@ -12,7 +12,11 @@ RUN apk update \
     && mv /opt/jboss/wildfly-preview-26.1.1.Final /opt/jboss/wildfly \
     && rm wildfly-preview-26.1.1.Final.tar.gz \
     && chown -R 1000:0 /opt/jboss/wildfly \
-    && chmod -R g+rw /opt/jboss/wildfly
+    && chmod -R g+rw /opt/jboss/wildfly \
+    && apk add tzdata \
+    && cp /usr/share/zoneinfo/America/Montevideo /etc/localtime \
+    && sh /opt/jboss/wildfly/bin/add-user.sh -u user -p user1234 --silent \
+    && sh /opt/jboss/wildfly/bin/add-user.sh -a -u APPuser -p user1234 --silent 
 
 # Ensure signals are forwarded to the JVM process correctly for graceful shutdown
 ENV LAUNCH_JBOSS_IN_BACKGROUND true
@@ -20,8 +24,5 @@ ENV LAUNCH_JBOSS_IN_BACKGROUND true
 USER 1000:0
 
 WORKDIR /opt/jboss/wildfly
-
-RUN sh /opt/jboss/wildfly/bin/add-user.sh -u 'user' -p 'user1234' --silent && \
-    sh /opt/jboss/wildfly/bin/add-user.sh -a -u 'APPuser' -p 'user1234' --silent 
 
 CMD ["/bin/sh", "/opt/jboss/wildfly/levantarWildfly.sh"]

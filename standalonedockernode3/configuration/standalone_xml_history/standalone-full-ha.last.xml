@@ -565,7 +565,8 @@
             </application-security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:webservices:2.0" statistics-enabled="${wildfly.webservices.statistics-enabled:${wildfly.statistics-enabled:false}}">
-            <wsdl-host>${jboss.bind.address:192.168.10.5}</wsdl-host>
+            <wsdl-host>${jboss.bind.address:192.168.10.4}</wsdl-host>
+            <wsdl-port>8287</wsdl-port>
             <endpoint-config name="Standard-Endpoint-Config"/>
             <endpoint-config name="Recording-Endpoint-Config">
                 <pre-handler-chain name="recording-handlers" protocol-bindings="##SOAP11_HTTP ##SOAP11_HTTP_MTOM ##SOAP12_HTTP ##SOAP12_HTTP_MTOM">
@@ -578,16 +579,16 @@
     </profile>
     <interfaces>
         <interface name="management">
-            <inet-address value="${jboss.bind.address.management:192.168.10.5}"/>
+            <inet-address value="${jboss.bind.address.management:192.168.10.4}"/>
         </interface>
         <interface name="private">
-            <inet-address value="${jboss.bind.address.private:192.168.10.5}"/>
+            <inet-address value="${jboss.bind.address.private:192.168.10.4}"/>
         </interface>
         <interface name="public">
-            <inet-address value="${jboss.bind.address:192.168.10.5}"/>
+            <inet-address value="${jboss.bind.address:192.168.10.4}"/>
         </interface>
         <interface name="unsecure">
-            <inet-address value="${jboss.bind.address.unsecure:192.168.10.5}"/>
+            <inet-address value="${jboss.bind.address.unsecure:192.168.10.4}"/>
         </interface>
     </interfaces>
     <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">

@@ -1,6 +1,8 @@
 FROM delfer/alpine-ftp-server:latest
 RUN echo 'listen_port=8021' >> /etc/vsftpd/vsftpd.conf \ 
 	&& mkdir /home/testingEnvironmentBlog \
-	&& chmod 777 -R /home/testingEnvironmentBlog 
+	&& chmod 777 -R /home/testingEnvironmentBlog && \
+    apk add tzdata && \
+    cp /usr/share/zoneinfo/America/Montevideo /etc/localtime
 
 ENTRYPOINT ["/sbin/tini", "--", "/bin/start_vsftpd.sh"]
